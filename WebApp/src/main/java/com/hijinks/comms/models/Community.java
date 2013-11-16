@@ -3,14 +3,14 @@ package com.hijinks.comms.models;
 public class Community {
 	int id;
 	String name;
-	User owner;
+	int owner;
 	String keywords;
 	String description;
 	boolean keywordsEnabled;
 	String visibilityLevel;
 	String accessLevel;
 	
-	public Community(int id, String name, User owner, String keywords,
+	public Community(int id, String name, int owner, String keywords,
 			String description, boolean keywordsEnabled,
 			String visibilityLevel, String accessLevel) {
 		this.id = id;
@@ -22,6 +22,8 @@ public class Community {
 		this.visibilityLevel = visibilityLevel;
 		this.accessLevel = accessLevel;
 	}
+	
+	public Community() {}
 	
 	public int getId() {
 		return id;
@@ -38,10 +40,10 @@ public class Community {
 		this.name = name;
 	}
 	
-	public User getOwner() {
+	public int getOwner() {
 		return owner;
 	}
-	public void setOwner(User owner) {
+	public void setOwner(int owner) {
 		this.owner = owner;
 	}
 	public String getKeywords() {

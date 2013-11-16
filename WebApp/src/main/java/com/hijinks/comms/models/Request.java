@@ -3,29 +3,40 @@ package com.hijinks.comms.models;
 import java.util.Date;
 
 public class Request {
-	Community community;
-	User user;
+	int id;
+	int community;
+	int user;
 	Date date;
 	
-	public Request(Community community, User user, Date date) {
+	public Request(int community, int user, Date date) {
 		this.community = community;
 		this.user = user;
 		this.date = date;
 	}
 	
-	public Community getCommunity() {
+	public Request() {}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getCommunity() {
 		return community;
 	}
 
-	public void setCommunity(Community community) {
+	public void setCommunity(int community) {
 		this.community = community;
 	}
 
-	public User getUser() {
+	public int getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(int user) {
 		this.user = user;
 	}
 

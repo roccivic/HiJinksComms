@@ -15,6 +15,8 @@ public class User {
 		this.type = type;
 	}
 	
+	public User() {}
+	
 	public int getId() {
 		return id;
 	}

@@ -3,12 +3,13 @@ package com.hijinks.comms.models;
 import java.util.Date;
 
 public class Invitation {
-	Community community;
-	User invitedBy;
-	User invitee;
+	int id;
+	int community;
+	int invitedBy;
+	int invitee;
 	Date date;
 	
-	public Invitation(Community community, User invitedBy, User invitee,
+	public Invitation(int community, int invitedBy, int invitee,
 			Date date) {
 		this.community = community;
 		this.invitedBy = invitedBy;
@@ -16,27 +17,37 @@ public class Invitation {
 		this.date = date;
 	}
 	
-	public Community getCommunity() {
+	public Invitation(){}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getCommunity() {
 		return community;
 	}
 
-	public void setCommunity(Community community) {
+	public void setCommunity(int community) {
 		this.community = community;
 	}
 
-	public User getInvitedBy() {
+	public int getInvitedBy() {
 		return invitedBy;
 	}
 
-	public void setInvitedBy(User invitedBy) {
+	public void setInvitedBy(int invitedBy) {
 		this.invitedBy = invitedBy;
 	}
 
-	public User getInvitee() {
+	public int getInvitee() {
 		return invitee;
 	}
 
-	public void setInvitee(User invitee) {
+	public void setInvitee(int invitee) {
 		this.invitee = invitee;
 	}
 

@@ -6,12 +6,12 @@ public class Announcement {
 	int id;
 	String title;
 	String text;
-	Community community;
+	int community;
 	Date date;
-	User createdBy;
+	int createdBy;
 	
-	public Announcement(int id, String title, String text, Community community,
-			Date date, User createdBy) {
+	public Announcement(int id, String title, String text, int community,
+			Date date, int createdBy) {
 		this.id = id;
 		this.title = title;
 		this.text = text;
@@ -19,6 +19,8 @@ public class Announcement {
 		this.date = date;
 		this.createdBy = createdBy;
 	}
+	
+	public Announcement() {}
 	
 	public int getId() {
 		return id;
@@ -44,11 +46,11 @@ public class Announcement {
 		this.text = text;
 	}
 
-	public Community getCommunity() {
+	public int getCommunity() {
 		return community;
 	}
 
-	public void setCommunity(Community community) {
+	public void setCommunity(int community) {
 		this.community = community;
 	}
 
@@ -60,11 +62,11 @@ public class Announcement {
 		this.date = date;
 	}
 
-	public User getCreatedBy() {
+	public int getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(User createdBy) {
+	public void setCreatedBy(int createdBy) {
 		this.createdBy = createdBy;
 	}
 
