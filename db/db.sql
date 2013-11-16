@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 15, 2013 at 07:19 PM
+-- Generation Time: Nov 16, 2013 at 11:04 AM
 -- Server version: 5.5.32-0ubuntu0.12.10.1
 -- PHP Version: 5.4.6-1ubuntu1.3
 
@@ -61,6 +61,19 @@ CREATE TABLE IF NOT EXISTS `Community` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `CommunityUsers`
+--
+
+CREATE TABLE IF NOT EXISTS `CommunityUsers` (
+  `community` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  KEY `user` (`user`),
+  KEY `community` (`community`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Invitation`
 --
 
@@ -105,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(32) NOT NULL,
   `salt` varchar(32) NOT NULL,
-  `type` enum('developer','tester','manager','') NOT NULL,
+  `type` enum('developer','tester','manager') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -126,6 +139,13 @@ ALTER TABLE `Announcement`
 --
 ALTER TABLE `Community`
   ADD CONSTRAINT `Community_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `CommunityUsers`
+--
+ALTER TABLE `CommunityUsers`
+  ADD CONSTRAINT `CommunityUsers_ibfk_2` FOREIGN KEY (`community`) REFERENCES `Community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `CommunityUsers_ibfk_1` FOREIGN KEY (`user`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Invitation`
