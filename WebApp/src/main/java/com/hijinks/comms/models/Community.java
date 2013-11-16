@@ -1,5 +1,7 @@
 package com.hijinks.comms.models;
 
+import java.sql.Timestamp;
+
 public class Community {
 	int id;
 	String name;
@@ -9,10 +11,11 @@ public class Community {
 	boolean keywordsEnabled;
 	String visibilityLevel;
 	String accessLevel;
-	
+	Timestamp created;
+
 	public Community(int id, String name, int owner, String keywords,
 			String description, boolean keywordsEnabled,
-			String visibilityLevel, String accessLevel) {
+			String visibilityLevel, String accessLevel,Timestamp created) {
 		this.id = id;
 		this.name = name;
 		this.owner = owner;
@@ -21,6 +24,7 @@ public class Community {
 		this.keywordsEnabled = keywordsEnabled;
 		this.visibilityLevel = visibilityLevel;
 		this.accessLevel = accessLevel;
+		this.created = created;
 	}
 	
 	public Community() {}
@@ -81,6 +85,14 @@ public class Community {
 	
 	public void setAccessLevel(String accessLevel) {
 		this.accessLevel = accessLevel;
+	}
+	
+	public Timestamp getCreated() {
+		return created;
+	}
+
+	public void setCreated(Timestamp timestamp) {
+		this.created = timestamp;
 	}
 	
 }
