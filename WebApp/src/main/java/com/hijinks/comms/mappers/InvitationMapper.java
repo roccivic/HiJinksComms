@@ -40,7 +40,7 @@ public class InvitationMapper implements RowMapper<Invitation>{
 		   invitedBy.setEmail(rs.getString("inviteeEmail"));
 		   invitedBy.setType(rs.getString("inviteeType"));
 		   Invitation invitation = new Invitation();
-		   invitation.setId(rs.getInt("id"));
+		   invitation.setId(rs.getInt("invitationId"));
 		   invitation.setCommunity(community);
 		   invitation.setInvitedBy(invitedBy);
 		   invitation.setInvitee(invitee);
