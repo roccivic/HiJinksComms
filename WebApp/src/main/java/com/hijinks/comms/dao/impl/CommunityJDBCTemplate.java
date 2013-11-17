@@ -28,25 +28,34 @@ public class CommunityJDBCTemplate implements CommunityDAO{
 
 	@Override
 	public List<Community> getCommunitiesOwnedByUser(int userId) {
-		String query = "SELECT `id`, `name`, `owner`, `description`, `keywords`, `keywordsEnabled`,"
-				+ " `visibilityLevel`, `accessLevel`, `created` FROM `Community` WHERE owner = ?";
+		String query = "SELECT `Community`.`id` AS `communityId`, `name`, `description`, `keywords`, `keywordsEnabled`,`visibilityLevel`, `accessLevel`, `created`,"
+				+ "`Users`.`id` AS `userId`, `fName`,`lName`, `email`, `type`"
+				+ "FROM `Community`"
+				+ "INNER JOIN `Users` ON `Users`.`id` = `Community`.`owner`"
+				+ "WHERE owner = ?";
 		List<Community> communities = jdbcTemplateObject.query(query, new Object[]{userId}, new CommunityMapper());
 		return communities;
 	}
 
 	@Override
 	public List<Community> getCommunitiesUserIsPartOf(int userId) {
-		String query = "SELECT `id`, `name`, `owner`, `description`, `keywords`, `keywordsEnabled`, `visibilityLevel`,"
-				+ " `accessLevel`, `created` FROM `Community`"
-				+ " INNER JOIN CommunityUsers ON Community.id = CommunityUsers.community WHERE CommunityUsers.user = ?";
+		String query = "SELECT `Community`.`id` AS `communityId`, `name`,  `description`, `keywords`, `keywordsEnabled`, `visibilityLevel`, `accessLevel`, `created`,"
+				+ "`Users`.`id` AS `userId`, `fName`,`lName`, `email`, `type`"
+				+ "FROM Community"
+				+ "INNER JOIN Users ON"
+				+ "`Users`.`id` = `Community`.`owner`"
+				+ "INNER JOIN CommunityUsers ON Community.id = CommunityUsers.community WHERE CommunityUsers.user = ?";
 		List<Community> communities = jdbcTemplateObject.query(query, new Object[]{userId}, new CommunityMapper());
 		return communities;
 	}
 
 	@Override
 	public List<Community> getNewestCommunities() {
-		String query = "SELECT `id`, `name`, `owner`, `description`, `keywords`, `keywordsEnabled`, "
-				+ "`visibilityLevel`, `accessLevel`, `created` FROM `Community` "
+		String query = "SELECT `Community`.`id` AS `communityId`, `name`, `description`, `keywords`, `keywordsEnabled`, `visibilityLevel`, `accessLevel`, `created`, "
+				+ "`Users`.`id` AS `userId`, `fName`,`lName`, `email`, `type`"
+				+ "FROM `Community` "
+				+ "INNER JOIN Users ON"
+				+ "`Users`.`id` = `Community`.`owner`"
 				+ "ORDER BY `created` DESC LIMIT 10;";
 		List<Community> communities = jdbcTemplateObject.query(query, new CommunityMapper());
 		return communities;
@@ -54,8 +63,12 @@ public class CommunityJDBCTemplate implements CommunityDAO{
 
 	@Override
 	public List<Community> getAllCommunities() {
-		String query = "SELECT `id`, `name`, `owner`, `description`, `keywords`, `keywordsEnabled`,"
-				+ " `visibilityLevel`, `accessLevel`, `created` FROM `Community` ORDER BY `created` DESC";
+		String query = "SELECT `Community`.`id` AS `communityId`, `name`, `description`, `keywords`, `keywordsEnabled`, `visibilityLevel`, `accessLevel`, `created`, "
+				+ "`Users`.`id` AS `userId`, `fName`,`lName`, `email`, `type`"
+				+ "FROM `Community` "
+				+ "INNER JOIN Users ON"
+				+ "`Users`.`id` = `Community`.`owner`"
+				+ "ORDER BY `created` DESC";
 		List<Community> communities = jdbcTemplateObject.query(query, new CommunityMapper());
 		return communities;
 	}

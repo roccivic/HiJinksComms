@@ -4,12 +4,12 @@ import java.util.Date;
 
 public class Invitation {
 	int id;
-	int community;
-	int invitedBy;
-	int invitee;
+	Community community;
+	User invitedBy;
+	User invitee;
 	Date date;
 	
-	public Invitation(int community, int invitedBy, int invitee,
+	public Invitation(Community community, User invitedBy, User invitee,
 			Date date) {
 		this.community = community;
 		this.invitedBy = invitedBy;
@@ -27,27 +27,27 @@ public class Invitation {
 		this.id = id;
 	}
 	
-	public int getCommunity() {
+	public Community getCommunity() {
 		return community;
 	}
 
-	public void setCommunity(int community) {
+	public void setCommunity(Community community) {
 		this.community = community;
 	}
 
-	public int getInvitedBy() {
+	public User getInvitedBy() {
 		return invitedBy;
 	}
 
-	public void setInvitedBy(int invitedBy) {
+	public void setInvitedBy(User invitedBy) {
 		this.invitedBy = invitedBy;
 	}
 
-	public int getInvitee() {
+	public User getInvitee() {
 		return invitee;
 	}
 
-	public void setInvitee(int invitee) {
+	public void setInvitee(User invitee) {
 		this.invitee = invitee;
 	}
 

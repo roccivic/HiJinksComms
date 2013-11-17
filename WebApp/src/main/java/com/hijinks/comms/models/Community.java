@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class Community {
 	int id;
 	String name;
-	int owner;
+	User owner;
 	String keywords;
 	String description;
 	boolean keywordsEnabled;
@@ -13,7 +13,7 @@ public class Community {
 	String accessLevel;
 	Timestamp created;
 
-	public Community(int id, String name, int owner, String keywords,
+	public Community(int id, String name, User owner, String keywords,
 			String description, boolean keywordsEnabled,
 			String visibilityLevel, String accessLevel,Timestamp created) {
 		this.id = id;
@@ -44,10 +44,10 @@ public class Community {
 		this.name = name;
 	}
 	
-	public int getOwner() {
+	public User getOwner() {
 		return owner;
 	}
-	public void setOwner(int owner) {
+	public void setOwner(User owner) {
 		this.owner = owner;
 	}
 	public String getKeywords() {
