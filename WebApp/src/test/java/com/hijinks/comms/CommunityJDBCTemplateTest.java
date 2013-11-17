@@ -1,12 +1,11 @@
 package com.hijinks.comms;
 
 import java.util.List;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.hijinks.comms.dao.impl.CommunityJDBCTemplate;
 import com.hijinks.comms.models.Community;
+
 public class CommunityJDBCTemplateTest {
 
 	public static void main(String[] args) {

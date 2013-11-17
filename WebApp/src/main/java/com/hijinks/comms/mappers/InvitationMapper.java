@@ -9,7 +9,7 @@ public class InvitationMapper implements RowMapper<Invitation>{
 	   public Invitation mapRow(ResultSet rs, int rowNum) throws SQLException {
 		   Invitation invitation = new Invitation();
 		   invitation.setId(rs.getInt("id"));
-		   invitation.setCommunity(rs.getInt("community"));
+		   invitation.setCommunity(rs.getInt("communityId"));
 		   invitation.setInvitedBy(rs.getInt("invitedBy"));
 		   invitation.setInvitee(rs.getInt("invitee"));
 		   invitation.setDate(rs.getTimestamp("date"));
