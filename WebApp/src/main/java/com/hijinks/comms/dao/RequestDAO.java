@@ -6,8 +6,7 @@ import com.hijinks.comms.models.Request;
 
 public interface RequestDAO {
 	public void setDataSource(DataSource ds);
-	boolean sendRequest(int userId, int communityId);
 	List<Request> getRequests(int userId);
-	boolean acceptRequest(int requestId);
-	boolean declineRequest(int requestId);
+	void sendRequest(int userId, int communityId);
+	void declineRequest(int user, int community);
 }
