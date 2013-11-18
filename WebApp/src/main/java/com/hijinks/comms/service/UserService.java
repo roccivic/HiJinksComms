@@ -1,5 +1,11 @@
 package com.hijinks.comms.service;
 
-public interface UserService {
+import java.util.List;
+import com.hijinks.comms.models.User;
 
+public interface UserService {
+	List<User> getUsersNotInCommunity(int communityId);
+	boolean LogIn(String email, String password);
+	List<User> getMembersOfCommunity(int communityId);
+	List<User> searchForMembers(String fname, String lname, String email);
 }
