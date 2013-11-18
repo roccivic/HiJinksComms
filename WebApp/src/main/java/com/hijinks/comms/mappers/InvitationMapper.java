@@ -34,11 +34,11 @@ public class InvitationMapper implements RowMapper<Invitation>{
 		   invitedBy.setEmail(rs.getString("invitedByEmail"));
 		   invitedBy.setType(rs.getString("invitedByType"));
 		   User invitee = new User();
-		   invitedBy.setId(rs.getInt("inviteeId"));
-		   invitedBy.setFname(rs.getString("inviteeFname"));
-		   invitedBy.setLname(rs.getString("inviteeLname"));
-		   invitedBy.setEmail(rs.getString("inviteeEmail"));
-		   invitedBy.setType(rs.getString("inviteeType"));
+		   invitee.setId(rs.getInt("inviteeId"));
+		   invitee.setFname(rs.getString("inviteeFname"));
+		   invitee.setLname(rs.getString("inviteeLname"));
+		   invitee.setEmail(rs.getString("inviteeEmail"));
+		   invitee.setType(rs.getString("inviteeType"));
 		   Invitation invitation = new Invitation();
 		   invitation.setId(rs.getInt("invitationId"));
 		   invitation.setCommunity(community);
