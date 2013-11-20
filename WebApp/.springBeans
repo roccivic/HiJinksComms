@@ -8,6 +8,7 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 		<config>src/test/java/config.xml</config>
+		<config>src/main/webapp/WEB-INF/tiles.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

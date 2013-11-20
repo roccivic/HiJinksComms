@@ -1,0 +1,2 @@
+<script src="<%= request.getContextPath() %>/resources/scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="<%= request.getContextPath() %>/resources/scripts/jquery.mobile-1.3.2.min.js" type="text/javascript"></script>
