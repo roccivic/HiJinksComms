@@ -32,8 +32,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>3.0.5.RELEASE</version>
-            <type>jar</type>
-            <scope>test</scope>
     	</dependency>
     	<!-- Mysql Connector -->
     	<dependency>
