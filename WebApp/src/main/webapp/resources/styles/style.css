@@ -47,6 +47,10 @@ p.intro strong {
     color:  #3E6790;
 }
 
+.type-nomenu .logout {
+	display: none;
+}
+
 .type-nomenu .ui-content,
 .type-normal .ui-content {
     padding: 0;

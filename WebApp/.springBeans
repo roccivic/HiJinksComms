@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/test/java/config.xml</config>
 		<config>src/main/webapp/WEB-INF/tiles.xml</config>
+		<config>src/main/java/beans.xml</config>
 	</configs>
 	<configSets>
 	</configSets>
