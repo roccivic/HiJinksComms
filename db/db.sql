@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 16, 2013 at 11:04 AM
+-- Generation Time: Nov 21, 2013 at 11:38 AM
 -- Server version: 5.5.32-0ubuntu0.12.10.1
 -- PHP Version: 5.4.6-1ubuntu1.3
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `Announcement` (
   PRIMARY KEY (`id`),
   KEY `communityId` (`communityId`),
   KEY `createdBy` (`createdBy`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `Community` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `owner` (`owner`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `CommunityUsers` (
   `user` int(11) NOT NULL,
   KEY `user` (`user`),
   KEY `community` (`community`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -84,10 +84,11 @@ CREATE TABLE IF NOT EXISTS `Invitation` (
   `invitee` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `communityId` (`communityId`,`invitedBy`,`invitee`),
+  UNIQUE KEY `composite` (`communityId`,`invitee`),
   KEY `invitedBy` (`invitedBy`),
-  KEY `invitee` (`invitee`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `invitee` (`invitee`),
+  KEY `communityId` (`communityId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -101,9 +102,10 @@ CREATE TABLE IF NOT EXISTS `Request` (
   `user` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `communityId` (`communityId`,`user`),
-  KEY `user` (`user`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  UNIQUE KEY `composite` (`communityId`,`user`),
+  KEY `user` (`user`),
+  KEY `communityId` (`communityId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -121,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `type` enum('developer','tester','manager') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Constraints for dumped tables
@@ -131,8 +133,8 @@ CREATE TABLE IF NOT EXISTS `Users` (
 -- Constraints for table `Announcement`
 --
 ALTER TABLE `Announcement`
-  ADD CONSTRAINT `Announcement_ibfk_2` FOREIGN KEY (`createdBy`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Announcement_ibfk_1` FOREIGN KEY (`communityId`) REFERENCES `Community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Announcement_ibfk_1` FOREIGN KEY (`communityId`) REFERENCES `Community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Announcement_ibfk_2` FOREIGN KEY (`createdBy`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Community`
@@ -144,23 +146,23 @@ ALTER TABLE `Community`
 -- Constraints for table `CommunityUsers`
 --
 ALTER TABLE `CommunityUsers`
-  ADD CONSTRAINT `CommunityUsers_ibfk_2` FOREIGN KEY (`community`) REFERENCES `Community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `CommunityUsers_ibfk_1` FOREIGN KEY (`user`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `CommunityUsers_ibfk_1` FOREIGN KEY (`user`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `CommunityUsers_ibfk_2` FOREIGN KEY (`community`) REFERENCES `Community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Invitation`
 --
 ALTER TABLE `Invitation`
-  ADD CONSTRAINT `Invitation_ibfk_3` FOREIGN KEY (`invitee`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Invitation_ibfk_1` FOREIGN KEY (`communityId`) REFERENCES `Community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Invitation_ibfk_2` FOREIGN KEY (`invitedBy`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Invitation_ibfk_2` FOREIGN KEY (`invitedBy`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Invitation_ibfk_3` FOREIGN KEY (`invitee`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Request`
 --
 ALTER TABLE `Request`
-  ADD CONSTRAINT `Request_ibfk_2` FOREIGN KEY (`user`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Request_ibfk_1` FOREIGN KEY (`communityId`) REFERENCES `Community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Request_ibfk_1` FOREIGN KEY (`communityId`) REFERENCES `Community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Request_ibfk_2` FOREIGN KEY (`user`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
