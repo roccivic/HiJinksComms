@@ -24,16 +24,16 @@ public class UserJDBCTemplateTest {
 		UserJDBCTemplate userJDBCTemplate = 
 	      (UserJDBCTemplate)context.getBean("userJDBCTemplate");
 
-		boolean result = userJDBCTemplate.LogIn(
+		User result = userJDBCTemplate.LogIn(
 			"michael.holmes@doesnotexist.com",
 			"123456"
 		);
-		System.out.println("Valid Login: " + (result ? "OK": "FAIL"));
+		System.out.println("Valid Login: " + (result != null ? "OK": "FAIL"));
 		result = userJDBCTemplate.LogIn(
 			"michael.holmes@doesnotexist.com",
 			"1234567"
 		);
-		System.out.println("Invalid Login: " + (result ? "FAIL": "OK"));
+		System.out.println("Invalid Login: " + (result == null ? "OK": "FAIL"));
 
 		System.out.println("Listing users of community 3");
 		printUsers(
