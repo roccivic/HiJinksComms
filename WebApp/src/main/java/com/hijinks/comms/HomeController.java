@@ -34,6 +34,9 @@ public class HomeController {
 			session.setAttribute("user", currentUser);
 			return "home";
 		} else {
+			model.addAttribute("errorClass", "notification error");
+			model.addAttribute("errorMsg", "Invalid email or password");
+			model.addAttribute("email", email);
 			return "login";
 		}
 	}

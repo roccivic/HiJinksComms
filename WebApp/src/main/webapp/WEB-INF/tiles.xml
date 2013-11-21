@@ -12,15 +12,61 @@
         <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
         <put-attribute name="scripts" value="/WEB-INF/views/scripts.jsp" />
     </definition>
- 
-    <definition name="home" extends="base">
-        <put-attribute name="title" value="Home" />
-        <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
-    </definition>
-    
+        
     <definition name="login" extends="base">
         <put-attribute name="type" value="nomenu" />
         <put-attribute name="title" value="Log In" />
         <put-attribute name="body" value="/WEB-INF/views/login.jsp" />
     </definition>
+ 
+    <definition name="home" extends="base">
+        <put-attribute name="title" value="Welcome to HiJinksComms" />
+        <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+    </definition>
+    
+    <definition name="newestCommunities" extends="base">
+        <put-attribute name="title" value="Newest Communities" />
+        <put-attribute name="body" value="/WEB-INF/views/communities.jsp" />
+    </definition>
+    
+    <definition name="communitiesYouOwn" extends="base">
+        <put-attribute name="title" value="Communities You Own" />
+        <put-attribute name="body" value="/WEB-INF/views/communities.jsp" />
+    </definition>
+    
+    <definition name="communitiesYouArePartOf" extends="base">
+        <put-attribute name="title" value="Communities You Are Part Of" />
+        <put-attribute name="body" value="/WEB-INF/views/communities.jsp" />
+    </definition>
+    
+    <definition name="community" extends="base">
+        <put-attribute name="title" value="View Community" />
+        <put-attribute name="body" value="/WEB-INF/views/community.jsp" />
+    </definition>
+    
+    <definition name="search" extends="base">
+        <put-attribute name="title" value="Search Communities" />
+        <put-attribute name="body" value="/WEB-INF/views/search.jsp" />
+    </definition>
+
+    <definition name="users" extends="base">
+        <put-attribute name="title" value="View Users" />
+        <put-attribute name="body" value="/WEB-INF/views/users.jsp" />
+    </definition>
+
+    <definition name="user" extends="base">
+        <put-attribute name="title" value="View User" />
+        <put-attribute name="body" value="/WEB-INF/views/user.jsp" />
+    </definition>
+    
+    <definition name="invitations" extends="base">
+        <put-attribute name="title" value="View Your Invitations" />
+        <put-attribute name="body" value="/WEB-INF/views/invitations.jsp" />
+    </definition>
+    
+    <definition name="requests" extends="base">
+        <put-attribute name="title" value="View Your Requests" />
+        <put-attribute name="body" value="/WEB-INF/views/requests.jsp" />
+    </definition>
+    
 </tiles-definitions>

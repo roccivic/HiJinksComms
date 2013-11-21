@@ -259,7 +259,7 @@ p.intro strong {
     background-repeat: no-repeat;
     background-position: 10px 50%;
 
-    padding: 10px 10px 10px 35px;
+    padding: 10px;
         
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -272,17 +272,14 @@ p.intro strong {
 .notification.error {
     border-color: hsl(0, 50%, 30%);
     background-color: hsl(0, 40%, 90%);
-    background-image: url('images/error.png');
 }
 .notification.warning {
     border-color: hsl(40, 50%, 30%);
     background-color: hsl(40, 50%, 90%);
-    background-image: url('images/warning.png');
 }
 .notification.notice {
     border-color: hsl(220, 50%, 30%);
     background-color: hsl(220, 50%, 90%);
-    background-image: url('images/notice.png');
 }
 
 @media all and (max-width: 750px) {

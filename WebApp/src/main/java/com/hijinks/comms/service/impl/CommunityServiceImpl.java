@@ -1,6 +1,7 @@
 package com.hijinks.comms.service.impl;
 
 import java.util.List;
+
 import com.hijinks.comms.dao.CommunityDAO;
 import com.hijinks.comms.models.Community;
 import com.hijinks.comms.service.CommunityService;
@@ -46,6 +47,11 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public void addMemberToCommunity(int userId, int communityId) {
 		communityDAO.addMemberToCommunity(userId, communityId);
+	}
+
+	@Override
+	public Community getCommunityById(int id) {
+		return communityDAO.getCommunityById(id);
 	}
 
 }

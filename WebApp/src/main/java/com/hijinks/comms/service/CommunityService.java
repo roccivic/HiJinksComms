@@ -1,6 +1,7 @@
 package com.hijinks.comms.service;
 
 import java.util.List;
+
 import com.hijinks.comms.models.Community;
 
 public interface CommunityService {
@@ -10,4 +11,5 @@ public interface CommunityService {
 	List<Community> getNewestCommunities();
 	List<Community> getAllCommunities();
 	void addMemberToCommunity(int userId, int communityId);
+	Community getCommunityById(int communityId);
 }

@@ -31,4 +31,9 @@ public class UserServiceImpl implements UserService {
 		return userDAO.searchForMembers(fname, lname, email);
 	}
 
+	@Override
+	public User getUserById(int userId) {
+		return userDAO.getUserById(userId);
+	}
+
 }

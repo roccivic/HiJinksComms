@@ -1,6 +1,3 @@
-<h2>
-	Welcome to HiJinksComms
-</h2>
 <p>
 	Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 	Nunc nisl lectus, auctor ac libero nec, pretium pharetra orci.

@@ -14,6 +14,9 @@
       <div data-role="content">
 			<tiles:insertAttribute name="header" />
 			<div class="content-primary">
+				<h2>
+					<tiles:insertAttribute name="title" ignore="true" />
+				</h2>
 				<tiles:insertAttribute name="body" />
 			</div>
 			<div class="content-secondary">

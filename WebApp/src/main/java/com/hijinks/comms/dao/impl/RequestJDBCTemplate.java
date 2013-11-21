@@ -44,7 +44,7 @@ public class RequestJDBCTemplate implements RequestDAO {
 				+ "`Community`.`owner` = `communityOwner`.`id` "
 				+ "INNER JOIN `Users`AS `user` ON "
 				+ "`Request`.`user` = `user`.`id` "
-				+ "WHERE `Request`.`user` = ?";
+				+ "WHERE `Community`.`owner` = ?";
 		List<Request> requests = jdbcTemplateObject.query(
 			query,
 			new Object[]{userId},

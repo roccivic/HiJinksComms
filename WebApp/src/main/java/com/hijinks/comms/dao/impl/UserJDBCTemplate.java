@@ -81,4 +81,21 @@ public class UserJDBCTemplate implements UserDAO {
 		);
 	}
 
+	@Override
+	public User getUserById(int userId) {
+		String query = "SELECT `id`, `fname`, `lname`, `email`, `type` "
+				+ "FROM `Users` "
+				+ "WHERE `id` = ?";
+		List<User> users = jdbcTemplateObject.query(
+			query,
+			new Object[]{userId},
+			new UserMapper()
+		);
+		if (users.size() == 0) {
+			return null;
+		} else {
+			return users.get(0);
+		}
+	}
+
 }

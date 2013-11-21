@@ -12,4 +12,5 @@ public interface UserDAO {
 	User LogIn(String email, String password);
 	List<User> getMembersOfCommunity(int communityId);
 	List<User> searchForMembers(String fname, String lname, String email);
+	public User getUserById(int userId);
 }

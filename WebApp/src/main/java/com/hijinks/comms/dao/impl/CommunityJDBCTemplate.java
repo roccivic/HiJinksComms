@@ -1,10 +1,13 @@
 package com.hijinks.comms.dao.impl;
 
 import java.util.List;
+
 import javax.sql.DataSource;
+
 import com.hijinks.comms.dao.CommunityDAO;
 import com.hijinks.comms.mappers.CommunityMapper;
 import com.hijinks.comms.models.Community;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class CommunityJDBCTemplate implements CommunityDAO{
@@ -40,10 +43,10 @@ public class CommunityJDBCTemplate implements CommunityDAO{
 	@Override
 	public List<Community> getCommunitiesUserIsPartOf(int userId) {
 		String query = "SELECT `Community`.`id` AS `communityId`, `name`,  `description`, `keywords`, `keywordsEnabled`, `visibilityLevel`, `accessLevel`, `created`,"
-				+ "`Users`.`id` AS `userId`, `fName`,`lName`, `email`, `type`"
-				+ "FROM Community"
-				+ "INNER JOIN Users ON"
-				+ "`Users`.`id` = `Community`.`owner`"
+				+ "`Users`.`id` AS `userId`, `fName`,`lName`, `email`, `type` "
+				+ "FROM Community "
+				+ "INNER JOIN Users ON "
+				+ "`Users`.`id` = `Community`.`owner` "
 				+ "INNER JOIN CommunityUsers ON Community.id = CommunityUsers.community WHERE CommunityUsers.user = ?";
 		List<Community> communities = jdbcTemplateObject.query(query, new Object[]{userId}, new CommunityMapper());
 		return communities;
@@ -77,6 +80,22 @@ public class CommunityJDBCTemplate implements CommunityDAO{
 	public void addMemberToCommunity(int userId, int communityId) {
 		String query = "INSERT INTO `CommunityUsers`(`community`, `user`) VALUES (?, ?)";
 		jdbcTemplateObject.update(query, userId, communityId);
+	}
+
+	@Override
+	public Community getCommunityById(int communityId) {
+		String query = "SELECT `Community`.`id` AS `communityId`, `name`, `description`, `keywords`, `keywordsEnabled`, `visibilityLevel`, `accessLevel`, `created`, "
+				+ "`Users`.`id` AS `userId`, `fName`,`lName`, `email`, `type`"
+				+ "FROM `Community` "
+				+ "INNER JOIN Users ON"
+				+ "`Users`.`id` = `Community`.`owner`"
+				+ "WHERE `Community`.`id` = ?";
+		List<Community> communities = jdbcTemplateObject.query(query, new Object[]{communityId}, new CommunityMapper());
+		if (communities.size() == 0) {
+			return null;
+		} else {
+			return communities.get(0);
+		}
 	}
 
 }

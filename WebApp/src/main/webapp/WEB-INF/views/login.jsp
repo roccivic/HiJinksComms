@@ -1,10 +1,10 @@
-<h2>
-  Login Form
-</h2>
 <form data-ajax="false" method="post" action="<%= request.getContextPath() %>/login">
+  <div class="${errorClass}">
+  	${errorMsg}
+  </div>
   <div data-role="fieldcontain">
     <label for="email">Email:</label>
-    <input type="text" name="email" id="email" value="" />
+    <input type="text" name="email" id="email" value="${email}" />
   </div>
   <div data-role="fieldcontain">
     <label for="password">Password:</label>

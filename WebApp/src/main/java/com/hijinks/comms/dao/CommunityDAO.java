@@ -1,7 +1,9 @@
 package com.hijinks.comms.dao;
 
 import java.util.List;
+
 import javax.sql.DataSource;
+
 import com.hijinks.comms.models.Community;
 
 public interface CommunityDAO {
@@ -13,4 +15,5 @@ public interface CommunityDAO {
 	List<Community> getNewestCommunities();
 	List<Community> getAllCommunities();
 	void addMemberToCommunity(int userId, int communityId);
+	public Community getCommunityById(int communityId);
 }
