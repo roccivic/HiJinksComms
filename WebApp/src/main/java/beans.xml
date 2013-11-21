@@ -35,4 +35,32 @@
       class="com.hijinks.comms.dao.impl.RequestJDBCTemplate">
       <property name="dataSource"  ref="dataSource" />
     </bean>
+    
+	    
+	<bean id="communityService"
+      class="com.hijinks.comms.service.impl.CommunityServiceImpl">
+      <property name="communityDAO"  ref="communityJDBCTemplate" />
+    </bean>
+   
+	<bean id="invitationService"
+      class="com.hijinks.comms.service.impl.InvitationServiceImpl">
+      <property name="invitationDAO"  ref="invitationJDBCTemplate" />
+      <property name="communityDAO"  ref="communityJDBCTemplate" />
+    </bean>
+   
+	<bean id="announcementService"
+      class="com.hijinks.comms.service.impl.AnnouncementServiceImpl">
+      <property name="announcementDAO"  ref="announcementJDBCTemplate" />
+    </bean>
+   
+	<bean id="userService"
+      class="com.hijinks.comms.service.impl.UserServiceImpl">
+      <property name="userDAO"  ref="userJDBCTemplate" />
+    </bean>
+	
+	<bean id="requestService"
+      class="com.hijinks.comms.service.impl.RequestServiceImpl">
+      <property name="requestDAO"  ref="requestJDBCTemplate" />
+      <property name="communityDAO"  ref="communityJDBCTemplate" />
+    </bean>
 </beans>

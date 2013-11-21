@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean LogIn(String email, String password) {
+	public User LogIn(String email, String password) {
 		return userDAO.LogIn(email, password);
 	}
 

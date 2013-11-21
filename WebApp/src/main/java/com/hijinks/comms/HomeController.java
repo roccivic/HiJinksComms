@@ -1,7 +1,9 @@
 package com.hijinks.comms;
 
 import java.util.Locale;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -9,8 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.hijinks.comms.dao.impl.UserJDBCTemplate;
+
 import com.hijinks.comms.models.User;
+import com.hijinks.comms.service.UserService;
 
 @Controller
 public class HomeController {
@@ -22,12 +25,13 @@ public class HomeController {
 		ApplicationContext context = 
 	             new ClassPathXmlApplicationContext("beans.xml");
 
-		UserJDBCTemplate userJDBCTemplate = 
-	      (UserJDBCTemplate)context.getBean("userJDBCTemplate");
+		UserService userService = 
+	      (UserService)context.getBean("userService");
 		
-		if (userJDBCTemplate.LogIn(email, password)) {
-			// FIXME: need to get the correct user object
-			session.setAttribute("user", new User());
+		User currentUser = userService.LogIn(email, password);
+		
+		if (currentUser != null) {
+			session.setAttribute("user", currentUser);
 			return "home";
 		} else {
 			return "login";

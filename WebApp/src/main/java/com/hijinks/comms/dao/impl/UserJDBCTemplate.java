@@ -32,15 +32,21 @@ public class UserJDBCTemplate implements UserDAO {
 	}
 
 	@Override
-	public boolean LogIn(String email, String password) {
-		String query = "SELECT COUNT(*) "
+	public User LogIn(String email, String password) {
+		String query = "SELECT `id`, `fname`, `lname`, `email`, `type` "
 				+ "FROM `Users` "
 				+ "WHERE `email` = ? "
 				+ "AND `password` = MD5(CONCAT(?, `salt`))";
-		return jdbcTemplateObject.queryForInt(
-			query,
-			new Object[]{email, password}
-		) == 1;
+		List<User> list = jdbcTemplateObject.query(
+				query,
+				new Object[]{email, password},
+				new UserMapper()
+			);
+		if (list.size() == 0) {
+			return null;
+		} else {
+			return list.get(0);
+		}
 	}
 
 	@Override
