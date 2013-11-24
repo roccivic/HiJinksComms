@@ -1,5 +1,6 @@
 package com.hijinks.comms.models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Invitation {
@@ -58,4 +59,9 @@ public class Invitation {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	public String getDateFormatted() {
+		return new SimpleDateFormat("HH:mm dd MMM yyyy").format(date);
+	}
+
 }

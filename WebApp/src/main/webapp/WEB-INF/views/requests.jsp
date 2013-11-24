@@ -11,7 +11,7 @@
 				<h2>Community: ${request.community.name}</h2>
 				<p>User: ${request.user.fname} ${request.user.lname}</p>
 				<p class="ui-li-aside">
-					${request.date}
+					${request.getDateFormatted()}
 				</p>
 			</a>
 		</li>

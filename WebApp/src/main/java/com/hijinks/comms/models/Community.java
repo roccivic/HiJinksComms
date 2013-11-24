@@ -1,6 +1,7 @@
 package com.hijinks.comms.models;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class Community {
 	int id;
@@ -89,6 +90,10 @@ public class Community {
 	
 	public Timestamp getCreated() {
 		return created;
+	}
+	
+	public String getCreatedFormatted() {
+		return new SimpleDateFormat("dd MMM yyyy").format(created);
 	}
 
 	public void setCreated(Timestamp timestamp) {

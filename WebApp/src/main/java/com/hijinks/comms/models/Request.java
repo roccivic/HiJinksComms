@@ -1,5 +1,6 @@
 package com.hijinks.comms.models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Request {
@@ -47,6 +48,9 @@ public class Request {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
+	
+	public String getDateFormatted() {
+		return new SimpleDateFormat("HH:mm dd MMM yyyy").format(date);
+	}
 }
 

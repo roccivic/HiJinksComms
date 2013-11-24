@@ -11,7 +11,7 @@
 				<h2>Community: ${invitation.community.name}</h2>
 				<p>Invited By: ${invitation.invitedBy.fname} ${invitation.invitedBy.lname}</p>
 				<p class="ui-li-aside">
-					${invitation.date}
+					${invitation.getDateFormatted()}
 				</p>
 			</a>
 		</li>

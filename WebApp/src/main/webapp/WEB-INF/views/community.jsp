@@ -26,7 +26,7 @@
 		<dt>Access Level</dt>
 		<dd>${community.accessLevel}</dd>
 		<dt>Created</dt>
-		<dd>${community.created}</dd>
+		<dd>${community.getCreatedFormatted()}</dd>
 	</dl>
 	
 	<ul data-role="listview" data-inset="true">
