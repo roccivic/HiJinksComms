@@ -35,7 +35,8 @@ public class CommunityJDBCTemplate implements CommunityDAO{
 				+ "`Users`.`id` AS `userId`, `fName`,`lName`, `email`, `type`"
 				+ "FROM `Community`"
 				+ "INNER JOIN `Users` ON `Users`.`id` = `Community`.`owner`"
-				+ "WHERE owner = ?";
+				+ "WHERE owner = ? "
+				+ "ORDER BY `name` ASC";
 		List<Community> communities = jdbcTemplateObject.query(query, new Object[]{userId}, new CommunityMapper());
 		return communities;
 	}
@@ -47,7 +48,8 @@ public class CommunityJDBCTemplate implements CommunityDAO{
 				+ "FROM Community "
 				+ "INNER JOIN Users ON "
 				+ "`Users`.`id` = `Community`.`owner` "
-				+ "INNER JOIN CommunityUsers ON Community.id = CommunityUsers.community WHERE CommunityUsers.user = ?";
+				+ "INNER JOIN CommunityUsers ON Community.id = CommunityUsers.community WHERE CommunityUsers.user = ? "
+				+ "ORDER BY `name` ASC";
 		List<Community> communities = jdbcTemplateObject.query(query, new Object[]{userId}, new CommunityMapper());
 		return communities;
 	}
@@ -71,7 +73,7 @@ public class CommunityJDBCTemplate implements CommunityDAO{
 				+ "FROM `Community` "
 				+ "INNER JOIN Users ON"
 				+ "`Users`.`id` = `Community`.`owner`"
-				+ "ORDER BY `created` DESC";
+				+ "ORDER BY `name` ASC";
 		List<Community> communities = jdbcTemplateObject.query(query, new CommunityMapper());
 		return communities;
 	}

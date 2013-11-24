@@ -91,9 +91,13 @@ public class Community {
 	public Timestamp getCreated() {
 		return created;
 	}
-	
+
 	public String getCreatedFormatted() {
 		return new SimpleDateFormat("dd MMM yyyy").format(created);
+	}
+	
+	public String getCreatedLongFormatted() {
+		return new SimpleDateFormat("HH:mm dd MMM yyyy").format(created);
 	}
 
 	public void setCreated(Timestamp timestamp) {

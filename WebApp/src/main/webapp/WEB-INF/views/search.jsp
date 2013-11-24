@@ -3,7 +3,7 @@
 
 <c:choose>
 	<c:when test="${not empty communities}">
-		<ul data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search...">
+		<ul data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search..." data-autodividers="true">
 		<c:forEach var="community" items="${communities}">
 			<li>
 				<a href="<%= request.getContextPath() %>/communities/${community.id}">

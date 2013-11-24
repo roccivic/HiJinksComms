@@ -26,7 +26,7 @@
     
     <definition name="newestCommunities" extends="base">
         <put-attribute name="title" value="Newest Communities" />
-        <put-attribute name="body" value="/WEB-INF/views/communities.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/newCommunities.jsp" />
     </definition>
     
     <definition name="communitiesYouOwn" extends="base">
