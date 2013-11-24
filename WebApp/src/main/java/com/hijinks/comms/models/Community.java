@@ -56,7 +56,7 @@ public class Community {
 	}
 	
 	public void setKeywords(String keywords) {
-		this.keywords = keywords;
+		this.keywords = keywords.replace(",", " ");
 	}
 	public String getDescription() {
 		return description;
