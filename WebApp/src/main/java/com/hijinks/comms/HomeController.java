@@ -32,7 +32,7 @@ public class HomeController extends CommonHandler {
 		
 		if (currentUser != null) {
 			session.setAttribute("user", currentUser);
-			return "home";
+			return "redirect:/";
 		} else {
 			model.addAttribute("errorClass", "notification error");
 			model.addAttribute("errorMsg", "Invalid email or password");
@@ -50,6 +50,6 @@ public class HomeController extends CommonHandler {
 	@RequestMapping(value = "/logout")
 	public String logOut(Locale locale, Model model, HttpSession session) {
 		session.setAttribute("user", null);
-		return "login";
+		return "redirect:/";
 	}
 }
