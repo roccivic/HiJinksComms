@@ -9,6 +9,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import com.hijinks.comms.dao.CommunityDAO;
 import com.hijinks.comms.dao.InvitationDAO;
 import com.hijinks.comms.models.Invitation;
+import com.hijinks.comms.models.Request;
 import com.hijinks.comms.service.InvitationService;
 
 public class InvitationServiceImpl implements InvitationService {
@@ -37,12 +38,22 @@ public class InvitationServiceImpl implements InvitationService {
 	}
 
 	@Override
-	public void acceptInvite(final int userId, final int communityId) {
+	public void acceptInvite(final int invitationId, final int userId) {
 		txTemplate.execute(new TransactionCallback <Void> (){
 			public Void doInTransaction(TransactionStatus txStatus){
 				try {
-					communityDAO.addMemberToCommunity(userId, communityId);
-					invitationDAO.deleteInvite(userId, communityId);
+					Invitation invitation = invitationDAO.getInvitationById(
+						invitationId,
+						userId
+					);
+					communityDAO.addMemberToCommunity(
+						invitation.getInvitee().getId(),
+						invitation.getCommunity().getId()
+					);
+					invitationDAO.deleteInvite(
+						invitationId,
+						userId
+					);
 				} catch (RuntimeException e) {
 					txStatus.setRollbackOnly();
 					throw e;
@@ -53,8 +64,12 @@ public class InvitationServiceImpl implements InvitationService {
 	}
 
 	@Override
-	public void deleteInvite(int userId, int communityId) {
-		invitationDAO.deleteInvite(userId, communityId);
+	public void deleteInvite(int invitationId, int userId) {
+		invitationDAO.deleteInvite(invitationId, userId);
+	}
+	@Override
+	public Invitation getInvitationById(int invitationId, int userId) {
+		return invitationDAO.getInvitationById(invitationId, userId);
 	}
 
 }

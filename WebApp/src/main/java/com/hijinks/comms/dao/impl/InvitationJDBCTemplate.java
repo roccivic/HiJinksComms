@@ -44,9 +44,40 @@ public class InvitationJDBCTemplate implements InvitationDAO{
 	}
 
 	@Override
-	public void deleteInvite(int user, int community) {
-		String query = "DELETE FROM `Invitation` WHERE `invitee` = ? AND `communityId` = ?";
-		jdbcTemplateObject.update(query, user, community);
+	public void deleteInvite(int invitationId, int userId) {
+		String query = "DELETE FROM `Invitation` "
+				+ "WHERE `id` = ?";
+		jdbcTemplateObject.update(query, invitationId);
+	}
+
+	@Override
+	public Invitation getInvitationById(int invitationId, int userId) {
+		String query = "SELECT `Invitation`.`id` as invitationId , `date`,"
+				+ "`Community`.`id` AS communityId, `Community`.`name`, `Community`.`keywords`, `Community`.`description`, `Community`.`keywordsEnabled`, `Community`.`visibilityLevel`, `Community`.`accessLevel`, `Community`.`created`,"
+				+ "`communityOwner`.`id` AS communityOwnerId, `communityOwner`.`fname` AS communityOwnerFname, `communityOwner`.`lname` AS communityOwnerLname, `communityOwner`.`email` AS communityOwnerEmail, `invitedBy`.`type` AS communityOwnerType,"
+				+ "`invitedBy`.`id` AS invitedById, `invitedBy`.`fname` AS invitedByFname, `invitedBy`.`lname` AS invitedByLname, `invitedBy`.`email` AS invitedByEmail, `invitedBy`.`type` AS invitedByType,"
+				+ "`invitee`.`id` AS inviteeId, `invitee`.`fname` AS inviteeFname, `invitee`.`lname` AS inviteeLname, `invitee`.`email` inviteeEmail, `invitee`.`type` AS inviteeType " 
+				+ "FROM `Invitation` "
+				+ "INNER JOIN Community ON "
+				+ "`Invitation`.`communityId` = `Community`.`id` "
+				+ "INNER JOIN `Users` AS `communityOwner` ON "
+				+ "`Community`.`owner` = `communityOwner`.`id` "
+				+ "INNER JOIN `Users`AS `invitedBy` ON "
+				+ "`Invitation`.`invitedBy` = `invitedBy`.`id` "
+				+ "INNER JOIN `Users` AS `invitee` ON "
+				+ "`Invitation`.`invitee` = `invitee`.`id` "
+				+ "WHERE `Invitation`.`id` = ? "
+				+ "AND `Invitation`.`invitee` = ?";
+		List<Invitation> invitations = jdbcTemplateObject.query(
+			query,
+			new Object[]{invitationId, userId},
+			new InvitationMapper()
+		);
+		if (invitations.size() == 0) {
+			return null;
+		} else {
+			return invitations.get(0);
+		}
 	}
 }
 

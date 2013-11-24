@@ -8,5 +8,6 @@ public interface InvitationDAO {
 	public void setDataSource(DataSource ds);
 	List<Invitation> getInvites(int userId);
 	void sendInvite(int userId, int communityId, int invitee);
-	void deleteInvite(int user, int community);
+	void deleteInvite(int invitationId, int userId);
+	Invitation getInvitationById(int invitationId, int userId);
 }

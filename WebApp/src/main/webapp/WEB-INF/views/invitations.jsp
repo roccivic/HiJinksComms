@@ -1,5 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="date" class="java.util.Date" />
+<c:if test="${not empty messageType}">
+	<div class="notification ${messageType}">
+		${messageText}
+	</div>
+</c:if>
 <c:if test="${empty invitations}">
 	<div class="notification warning">
 		No invitations
