@@ -11,6 +11,14 @@
       <property name="password" value="123456"/>
     </bean>
     
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>		
+	</bean>
+	
+	<bean id="txTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+    
 	<bean id="communityJDBCTemplate"
       class="com.hijinks.comms.dao.impl.CommunityJDBCTemplate">
       <property name="dataSource"  ref="dataSource" />
@@ -36,6 +44,11 @@
       <property name="dataSource"  ref="dataSource" />
     </bean>
     
+	<bean id="menuJDBCTemplate"
+      class="com.hijinks.comms.dao.impl.MenuJDBCTemplate">
+      <property name="dataSource"  ref="dataSource" />
+    </bean>
+    
 	    
 	<bean id="communityService"
       class="com.hijinks.comms.service.impl.CommunityServiceImpl">
@@ -46,6 +59,7 @@
       class="com.hijinks.comms.service.impl.InvitationServiceImpl">
       <property name="invitationDAO"  ref="invitationJDBCTemplate" />
       <property name="communityDAO"  ref="communityJDBCTemplate" />
+      <property name="txTemplate" ref="txTemplate"></property>
     </bean>
    
 	<bean id="announcementService"
@@ -62,5 +76,12 @@
       class="com.hijinks.comms.service.impl.RequestServiceImpl">
       <property name="requestDAO"  ref="requestJDBCTemplate" />
       <property name="communityDAO"  ref="communityJDBCTemplate" />
+      <property name="txTemplate" ref="txTemplate"></property>
+    </bean>
+    
+	<bean id="menuService"
+      class="com.hijinks.comms.service.impl.MenuServiceImpl">
+      <property name="menuDAO"  ref="menuJDBCTemplate" />
+      <property name="txTemplate" ref="txTemplate"></property>
     </bean>
 </beans>

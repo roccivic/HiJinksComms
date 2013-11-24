@@ -12,7 +12,7 @@ import com.hijinks.comms.models.User;
 import com.hijinks.comms.service.InvitationService;
 
 @Controller
-public class InvitiationController {
+public class InvitiationController extends CommonHandler {
 	@RequestMapping(value = "/invitations", method = RequestMethod.GET)
 	public String invitations(Locale locale, Model model, HttpSession session) {
 		if (session.getAttribute("user") == null) {

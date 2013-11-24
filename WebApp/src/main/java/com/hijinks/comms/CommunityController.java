@@ -17,7 +17,7 @@ import com.hijinks.comms.service.CommunityService;
 import com.hijinks.comms.service.UserService;
 
 @Controller
-public class CommunityController {
+public class CommunityController extends CommonHandler {
 	@RequestMapping(value = "/newestCommunities", method = RequestMethod.GET)
 	public String newestCommunities(Locale locale, Model model, HttpSession session) {
 		if (session.getAttribute("user") == null) {

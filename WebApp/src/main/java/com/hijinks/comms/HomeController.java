@@ -16,7 +16,7 @@ import com.hijinks.comms.models.User;
 import com.hijinks.comms.service.UserService;
 
 @Controller
-public class HomeController {
+public class HomeController extends CommonHandler {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String doLogin(Locale locale, Model model, HttpSession session,
 			@RequestParam(defaultValue="") String email,
