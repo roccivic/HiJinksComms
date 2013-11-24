@@ -1,9 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="date" class="java.util.Date" />
 <c:if test="${empty request}">
-	<p>
+	<div class="notification error">
 		Error: Request not found
-	</p>
+	</div>
 </c:if>
 <c:if test="${not empty request}">
 	<dl>

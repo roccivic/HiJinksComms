@@ -2,7 +2,9 @@
 
 <jsp:useBean id="date" class="java.util.Date" />
 <c:if test="${ empty communities}">
-	No communities
+	<div class="notification warning">
+		No communities
+	</div>
 </c:if>
 <c:if test="${not empty communities}">
 	<ul data-role="listview" data-inset="true">

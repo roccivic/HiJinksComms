@@ -1,7 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="date" class="java.util.Date" />
 <c:if test="${empty invitations}">
-	No invitations
+	<div class="notification warning">
+		No invitations
+	</div>
 </c:if>
 <c:if test="${not empty invitations}">
 	<ul data-role="listview" data-inset="true">

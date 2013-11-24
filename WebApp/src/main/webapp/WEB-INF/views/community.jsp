@@ -1,9 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="date" class="java.util.Date" />
 <c:if test="${ empty community}">
-	<p>
+	<div class="notification error">
 		Error: Community not found
-	</p>
+	</div>
 </c:if>
 <c:if test="${ not empty community}">
 	<dl>
