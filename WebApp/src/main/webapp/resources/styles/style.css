@@ -295,3 +295,11 @@ p.intro strong {
         float: none;
     }
 }
+
+@media all and (max-width: 30em) {
+    .ui-grid-a .ui-block-a,
+    .ui-grid-a .ui-block-b {
+        width: 100%;
+        clear: left;
+    }
+}

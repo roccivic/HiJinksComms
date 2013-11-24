@@ -37,12 +37,19 @@ public class RequestServiceImpl implements RequestService {
 	}
 
 	@Override
-	public void acceptRequest(final int userId, final int communityId) {
+	public void acceptRequest(final int requestId, final int ownerId) {
 		txTemplate.execute(new TransactionCallback <Void> (){
 			public Void doInTransaction(TransactionStatus txStatus){
 				try {
-					communityDAO.addMemberToCommunity(userId, communityId);
-					requestDAO.declineRequest(userId, communityId);
+					Request request = requestDAO.getRequestById(
+						requestId,
+						ownerId
+					);
+					communityDAO.addMemberToCommunity(
+						request.getUser().getId(),
+						request.getCommunity().getId()
+					);
+					requestDAO.declineRequest(requestId, ownerId);
 				} catch (RuntimeException e) {
 					txStatus.setRollbackOnly();
 					throw e;
@@ -53,8 +60,12 @@ public class RequestServiceImpl implements RequestService {
 	}
 
 	@Override
-	public void declineRequest(int userId, int communityId) {
-		requestDAO.declineRequest(userId, communityId);
+	public void declineRequest(int requestId, int ownerId) {
+		requestDAO.declineRequest(requestId, ownerId);
+	}
+	@Override
+	public Request getRequestById(int requestId, int ownerId) {
+		return requestDAO.getRequestById(requestId, ownerId);
 	}
 
 }
