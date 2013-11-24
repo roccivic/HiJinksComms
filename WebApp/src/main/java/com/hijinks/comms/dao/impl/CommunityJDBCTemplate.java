@@ -81,7 +81,7 @@ public class CommunityJDBCTemplate implements CommunityDAO{
 	@Override
 	public void addMemberToCommunity(int userId, int communityId) {
 		String query = "INSERT INTO `CommunityUsers`(`community`, `user`) VALUES (?, ?)";
-		jdbcTemplateObject.update(query, userId, communityId);
+		jdbcTemplateObject.update(query, communityId, userId);
 	}
 
 	@Override
