@@ -1,5 +1,5 @@
 <nav>
-  <ul data-role="listview" data-theme="c" data-dividertheme="d">
+  <ul data-role="listview" data-theme="c" data-dividertheme="d" data-count-theme="e">
     <li data-role="list-divider">
     	Main Menu
     </li>
