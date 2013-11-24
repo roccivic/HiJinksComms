@@ -101,7 +101,7 @@ public class RequestJDBCTemplate implements RequestDAO {
 				+ "AND `Community`.`owner` = ?";
 		List<Request> requests = jdbcTemplateObject.query(
 			query,
-			new Object[]{requestId, userId},
+			new Object[]{requestId, ownerId},
 			new RequestMapper()
 		);
 		if (requests.size() == 0) {
