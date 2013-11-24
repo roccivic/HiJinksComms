@@ -16,7 +16,7 @@ public class MenuJDBCTemplate implements MenuDAO {
 	@Override
 	public Menu getMenu(int userId) {
 		Menu menu = new Menu();
-		menu.newestCommunities = Math.max(
+		menu.newestCommunities = Math.min(
 			jdbcTemplateObject.queryForInt(
 				"SELECT COUNT(*) "
 				+ "FROM `Community`"
