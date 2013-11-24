@@ -23,7 +23,8 @@ public class UserJDBCTemplate implements UserDAO {
 				+ "  SELECT `user` "
 				+ "  FROM `CommunityUsers` "
 				+ "  WHERE `CommunityUsers`.`community` = ?"
-				+ ")";
+				+ ") "
+				+ "ORDER BY `lname`,`fname` ASC";
 		return jdbcTemplateObject.query(
 			query,
 			new Object[]{communityId},
@@ -55,7 +56,8 @@ public class UserJDBCTemplate implements UserDAO {
 				+ "FROM `CommunityUsers` "
 				+ "INNER JOIN `Users` "
 				+ "ON `Users`.`id` = `CommunityUsers`.`user` "
-				+ "WHERE `CommunityUsers`.`community` = ?";
+				+ "WHERE `CommunityUsers`.`community` = ? "
+				+ "ORDER BY `lname`,`fname` ASC";
 		return jdbcTemplateObject.query(
 			query,
 			new Object[]{communityId},
@@ -69,7 +71,8 @@ public class UserJDBCTemplate implements UserDAO {
 				+ "FROM `Users` "
 				+ "WHERE fname LIKE ? "
 				+ "AND lname LIKE ? "
-				+ "AND email LIKE ?";
+				+ "AND email LIKE ? "
+				+ "ORDER BY `lname`,`fname` ASC";
 		return jdbcTemplateObject.query(
 			query,
 			new Object[]{

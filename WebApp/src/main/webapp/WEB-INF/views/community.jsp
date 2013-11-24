@@ -29,7 +29,7 @@
 		<dd>${community.getCreatedFormatted()}</dd>
 	</dl>
 	
-	<ul data-role="listview" data-inset="true">
+	<ul data-role="listview" data-inset="true" data-autodividers="true">
 		<li data-role="list-divider">Community Members</li>
 		<c:if test="${empty users}">
 			<li>No users</li>
@@ -38,7 +38,7 @@
 			<c:forEach var="user" items="${users}">
 				<li>
 					<a href="<%= request.getContextPath() %>/users/${user.id}">
-						${user.fname} ${user.lname}
+						${user.lname}, ${user.fname} 
 					</a>
 				</li>
 			</c:forEach>
