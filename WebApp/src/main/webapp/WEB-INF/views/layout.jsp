@@ -5,7 +5,7 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>
-		<tiles:insertAttribute name="title" ignore="true" />
+		HighJinksComms - <tiles:insertAttribute name="title" ignore="true" />
 	</title>
 	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/resources/styles/jquery.mobile-1.3.2.min.css" />
 	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/resources/styles/style.css" />
