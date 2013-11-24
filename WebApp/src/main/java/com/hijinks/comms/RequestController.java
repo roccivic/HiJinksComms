@@ -74,6 +74,14 @@ public class RequestController extends CommonHandler {
 				((User)session.getAttribute("user")).getId()
 			)
 		);
+		model.addAttribute(
+			"messageType",
+			"notice"
+		);
+		model.addAttribute(
+			"messageText",
+			"Successfully rejected request"
+		);
 		return "requests";
 	}
 	@RequestMapping(value = "/acceptRequest/{id}", method = RequestMethod.GET)
@@ -96,6 +104,14 @@ public class RequestController extends CommonHandler {
 			requestService.getRequests(
 				((User)session.getAttribute("user")).getId()
 			)
+		);
+		model.addAttribute(
+			"messageType",
+			"notice"
+		);
+		model.addAttribute(
+			"messageText",
+			"Successfully accepted request"
 		);
 		return "requests";
 	}
