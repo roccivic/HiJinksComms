@@ -79,4 +79,9 @@
         <put-attribute name="body" value="/WEB-INF/views/request.jsp" />
     </definition>
     
+    <definition name="createCommunity" extends="base">
+        <put-attribute name="title" value="Create Community" />
+        <put-attribute name="body" value="/WEB-INF/views/createCommunity.jsp" />
+    </definition>
+    
 </tiles-definitions>
