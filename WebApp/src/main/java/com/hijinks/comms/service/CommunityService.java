@@ -5,7 +5,7 @@ import java.util.List;
 import com.hijinks.comms.models.Community;
 
 public interface CommunityService {
-	void createCommunity(String name, int owner, String keywords, String description, boolean keywordsEnabled, String visiblityLevel, String accessLevel);
+	Community createCommunity(String name, int owner, String keywords, String description, boolean keywordsEnabled, String visiblityLevel, String accessLevel);
 	List<Community> getCommunitiesOwnedByUser(int userId);
 	List<Community> getCommunitiesUserIsPartOf(int userId);
 	List<Community> getNewestCommunities();

@@ -3,14 +3,31 @@ package com.hijinks.comms.models;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Length.List;
+
 public class Community {
 	int id;
+	@List({
+	    @Length(min = 1, message = "The name must be at least 1 character long"),
+	    @Length(max = 30, message = "The name must be less than 31 characters long")
+	})
 	String name;
 	User owner;
+	@Length(max = 101, message = "The keywords field must be less than 101 characters long")
 	String keywords;
+	@List({
+	    @Length(min = 1, message = "The description must be at least 1 character long"),
+	    @Length(max = 101, message = "The description must be less than 101 characters long")
+	})
 	String description;
+	@NotNull(message="Please, specify if you want to enable or disable keywords")
 	boolean keywordsEnabled;
+	@NotNull(message="Please, specify visibility level")
 	String visibilityLevel;
+	@NotNull(message="Please, specify access level")
 	String accessLevel;
 	Timestamp created;
 

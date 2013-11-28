@@ -1,49 +1,45 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <jsp:useBean id="date" class="java.util.Date" />
- <c:if test="${not empty error}">
- <div class="notification error">
-		${error}
-	</div>
-</c:if>
- <form data-ajax="false" method="POST" action="<%= request.getContextPath() %>/creatingCommunity">
+ <form:form method="POST" action="createCommunity" modelAttribute="Community">
  <div data-role="fieldcontain">
-    <label for="name">*Name:</label>
-    <input type="text" name="name" id="name" value="${name}" />
+    <form:label path="name">Name:</form:label>
+    <form:input path="name" />
+     <form:errors path="name" style="color:red"></form:errors>
   </div>
   <div data-role="fieldcontain">
-    <label for="description">*Description:</label>
-    <input type="text" name="description" id="description" value="${description}" />
+    <form:label path="description">Description:</form:label>
+    <form:input path="description" />
+    <form:errors path="description" style="color:red"></form:errors>
   </div>
   <div data-role="fieldcontain">
-    <label for="keywords">Keywords:</label>
-    <input type="text" name="keywords" id="keywords" value="${keywords}" />
+    <form:label path="keywords">Keywords:</form:label>
+    <form:input  path="keywords" />
+    <form:errors path="keywords" style="color:red"></form:errors>
   </div>
   <div data-role="fieldcontain">
   <fieldset data-role="controlgroup" data-type="horizontal">
   <legend>Keywords Enabled:</legend>
-  <label for="keywordsEnabled1">Yes</label>
-  <input id="keywordsEnabled1" type="radio" name="keywordsEnabled" value="1" checked="checked" />
-  <label for="keywordsEnabled0">No</label>
-  <input id="keywordsEnabled0" type="radio" name="keywordsEnabled" value="0" />
+  <form:radiobutton path="keywordsEnabled" value="0" label="No" />
+  <form:radiobutton path="keywordsEnabled" value="1" label="Yes"/>
   </fieldset>
+  <form:errors path="keywordsEnabled" style="color:red"></form:errors>
   </div>
   <div data-role="fieldcontain">
   <fieldset data-role="controlgroup" data-type="horizontal">
   <legend>Visibility Level:</legend>
-  <label for="visibilityOpen">Open</label>
-  <input id="visibilityOpen" type="radio" name="visibilityLevel" value="open" checked="checked" />
-  <label for="visibilityPrivate">Private</label>
-  <input id="visibilityPrivate" type="radio" name="visibilityLevel" value="private" />
+  <form:radiobutton path="visibilityLevel" value="private" label="Private"/>
+  <form:radiobutton path="visibilityLevel" value="open" label="Open"/>
   </fieldset>
+  <form:errors path="visibilityLevel" style="color:red"></form:errors>
   </div>
   <div data-role="fieldcontain">
   <fieldset data-role="controlgroup" data-type="horizontal">
   <legend>Access Level:</legend>
-  <label for="accessLevelRestricted">Restricted</label>
-  <input id="accessLevelRestricted" type="radio" name="accessLevel" value="restricted" checked="checked" />
-  <label for="accessLevelUnrestricted">Unrestricted</label>
-  <input id="accessLevelUnrestricted" type="radio" name="accessLevel" value="unrestricted" />
+  <form:radiobutton path="accessLevel" value="restricted" label="Restricted"/>
+  <form:radiobutton path="accessLevel" value="unrestricted" label="Unrestricted"/>
   </fieldset>
+    <form:errors path="accessLevel" style="color:red"></form:errors>
   </div>
   <input data-theme="b" type="submit" value="Ok" />
-  </form>
+  </form:form>

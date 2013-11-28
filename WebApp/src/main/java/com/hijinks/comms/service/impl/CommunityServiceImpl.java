@@ -13,7 +13,7 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public void createCommunity(String name, int owner, String keywords,
+	public Community createCommunity(String name, int owner, String keywords,
 		String description, boolean keywordsEnabled, String visiblityLevel,
 		String accessLevel
 	) {
@@ -22,6 +22,9 @@ public class CommunityServiceImpl implements CommunityService {
 			description, keywordsEnabled, visiblityLevel,
 			accessLevel
 		);
+		Community community = communityDAO.getNewestCommunity();
+		communityDAO.addMemberToCommunity(owner, community.getId());
+		return community;
 	}
 
 	@Override

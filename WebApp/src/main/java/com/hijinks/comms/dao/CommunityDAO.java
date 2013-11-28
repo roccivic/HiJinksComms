@@ -16,4 +16,5 @@ public interface CommunityDAO {
 	List<Community> getAllCommunities();
 	void addMemberToCommunity(int userId, int communityId);
 	public Community getCommunityById(int communityId);
+	Community getNewestCommunity();
 }

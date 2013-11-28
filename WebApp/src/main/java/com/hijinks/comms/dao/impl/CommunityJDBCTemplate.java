@@ -27,6 +27,24 @@ public class CommunityJDBCTemplate implements CommunityDAO{
 				+ "(`name`, `owner`, `description`, `keywords`, `keywordsEnabled`, `visibilityLevel`, `accessLevel`) "
 				+ "VALUES (? , ?, ?, ?, ?, ?, ?)";
 		jdbcTemplateObject.update(query, name, owner, keywords, description, keywordsEnabled, visiblityLevel, accessLevel);
+		
+	}
+	
+	@Override
+	public Community getNewestCommunity() {
+		String query = "SELECT `Community`.`id` AS `communityId`, `name`, `description`, `keywords`, `keywordsEnabled`, `visibilityLevel`, `accessLevel`, `created`, "
+				+ "`Users`.`id` AS `userId`, `fName`,`lName`, `email`, `type`"
+				+ "FROM `Community` "
+				+ "INNER JOIN Users ON"
+				+ "`Users`.`id` = `Community`.`owner`ORDER BY  `communityId` DESC "
+				+ "LIMIT 1";
+		List<Community> communities = jdbcTemplateObject.query(query, new CommunityMapper());
+		if (communities.size() == 0) {
+			return null;
+		} else {
+			return communities.get(0);
+		}
+		
 	}
 
 	@Override

@@ -1,24 +1,34 @@
 package com.hijinks.comms;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.hijinks.comms.models.Community;
 import com.hijinks.comms.models.User;
 import com.hijinks.comms.service.CommunityService;
 import com.hijinks.comms.service.UserService;
 
 @Controller
 public class CommunityController extends CommonHandler {
+	
+
 	@RequestMapping(value = "/newestCommunities", method = RequestMethod.GET)
 	public String newestCommunities(Locale locale, Model model, HttpSession session) {
 		if (session.getAttribute("user") == null) {
@@ -76,6 +86,7 @@ public class CommunityController extends CommonHandler {
 			"users",
 			userService.getMembersOfCommunity(Integer.parseInt(id))
 		);
+		
 		return "community";
 	}
 	@RequestMapping(value = "/communitiesYouOwn", method = RequestMethod.GET)
@@ -116,42 +127,44 @@ public class CommunityController extends CommonHandler {
 		);
 		return "communitiesYouOwn";
 	}
+	
 	@RequestMapping(value = "/createCommunity", method = RequestMethod.GET)
-	public String createCommunity(Locale locale, Model model, HttpSession session) {
+	public ModelAndView createCommunity(Locale locale, Model model, HttpSession session) {
+		ModelMap map=new ModelMap();
+		map.addAttribute("Community", new Community());
+		
 		if (session.getAttribute("user") == null) {
-			return "login";
+			return new ModelAndView("login", map);
 		}
-		return "createCommunity";
+		return new ModelAndView("createCommunity", map);
 	}
 	
-	@RequestMapping(value = "/creatingCommunity", method = RequestMethod.POST)
-	public String creatingCommunity(
-									@RequestParam(defaultValue="") String name, @RequestParam(defaultValue="") String description,
-									@RequestParam(defaultValue="") String keywords, @RequestParam(defaultValue="") boolean keywordsEnabled, @RequestParam(defaultValue="") String visibilityLevel,
-									@RequestParam(defaultValue="") String accessLevel, 
-									Locale locale, Model model, HttpSession session) {
-		if (session.getAttribute("user") == null) {
-			return "login";
-		}
-		System.out.println(name);
-		if(name == "" || description == "")
-		{
-			model.addAttribute("error", "Please, populate all mandatory fields");
-			model.addAttribute("name", name);
-			model.addAttribute("description", description);
-			model.addAttribute("keywords", keywords);
-			model.addAttribute("keywordsEnabled", keywordsEnabled);
-			model.addAttribute("visibilityLevel", visibilityLevel);
-			model.addAttribute("accessLevel", accessLevel);
-			return "createCommunity";
-		}
+	@RequestMapping(value = "/createCommunity", method = RequestMethod.POST)
+	public String addSinger(@ModelAttribute("Community") @Valid Community community, BindingResult result, ModelMap model, HttpSession session) {	
+
+		if(result.hasErrors())		
+			return "createCommunity";			
+		
 		ApplicationContext context = 
 	             new ClassPathXmlApplicationContext("beans.xml");
 
 		CommunityService communityService = 
 	      (CommunityService)context.getBean("communityService");
-		communityService.createCommunity(name, ((User) session.getAttribute("user")).getId(), keywords, description, keywordsEnabled, visibilityLevel, accessLevel);
-		model.addAttribute("message", "Community created successfully");
-		return "home";
+		Community newCommunity = communityService.createCommunity(community.getName(), ((User) session.getAttribute("user")).getId(), community.getKeywords(), community.getDescription(), community.isKeywordsEnabled(), community.getVisibilityLevel(), community.getAccessLevel());
+		model.addAttribute(
+			"community",
+			newCommunity
+		);
+		
+		UserService userService = 
+	      (UserService)context.getBean("userService");
+
+		model.addAttribute(
+			"users",
+			userService.getMembersOfCommunity(newCommunity.getId())
+		);
+
+		return "community";
 	}
+
 }
