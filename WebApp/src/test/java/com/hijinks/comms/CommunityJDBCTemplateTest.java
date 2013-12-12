@@ -23,7 +23,7 @@ public class CommunityJDBCTemplateTest {
 		System.out.println("Added a member.\n---------");
 		//Get All Communities. Newest community ^^^^^ should be on top
 		System.out.println("Get All Communities\n-------------------");
-		List<Community> communities = communityJDBCTemplate.getAllCommunities();
+		List<Community> communities = communityJDBCTemplate.getAllCommunities(1);
 		for (Community record : communities) {
 	         System.out.println("ID : " + record.getId());
 	         System.out.println("Name : " + record.getName());
@@ -68,7 +68,7 @@ public class CommunityJDBCTemplateTest {
 	      }
 		//Get NEWEST COMMUNITIES(TOP 10)
 			System.out.println("Get NEWEST COMMUNITIES(TOP 10)\n-------------------");
-			communities = communityJDBCTemplate.getNewestCommunities();
+			communities = communityJDBCTemplate.getNewestCommunities(1);
 			for (Community record : communities) {
 		         System.out.println("ID : " + record.getId());
 		         System.out.println("Name : " + record.getName());
