@@ -35,5 +35,15 @@ public class UserServiceImpl implements UserService {
 	public User getUserById(int userId) {
 		return userDAO.getUserById(userId);
 	}
+	
+	@Override
+	public boolean isOwner(int userId, int communityId) {
+		return userDAO.isOwner(userId, communityId);
+	}
+	
+	@Override
+	public boolean isPartOfCommunity(int userId, int communityId) {
+		return userDAO.isPartOfCommunity(userId, communityId);
+	}
 
 }

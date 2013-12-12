@@ -10,4 +10,6 @@ public interface UserService {
 	List<User> getMembersOfCommunity(int communityId);
 	List<User> searchForMembers(String fname, String lname, String email);
 	User getUserById(int userId);
+	boolean isOwner(int userId, int CommunityId);
+	boolean isPartOfCommunity(int userId, int CommunityId);
 }

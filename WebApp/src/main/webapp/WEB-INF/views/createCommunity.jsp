@@ -2,20 +2,23 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <jsp:useBean id="date" class="java.util.Date" />
  <form:form method="POST" action="createCommunity" modelAttribute="Community">
+ <form:errors path="name" class="notification error" style="display:block"></form:errors>
+ <form:errors path="description" class="notification error" style="display:block"></form:errors>
+ <form:errors path="keywords" class="notification error" style="display:block"></form:errors>
+ <form:errors path="keywordsEnabled" class="notification error" style="display:block"></form:errors>
+ <form:errors path="visibilityLevel" class="notification error" style="display:block"></form:errors>
+ <form:errors path="accessLevel" class="notification error" style="display:block"></form:errors>
  <div data-role="fieldcontain">
     <form:label path="name">Name:</form:label>
     <form:input path="name" />
-     <form:errors path="name" style="color:red"></form:errors>
   </div>
   <div data-role="fieldcontain">
     <form:label path="description">Description:</form:label>
     <form:input path="description" />
-    <form:errors path="description" style="color:red"></form:errors>
   </div>
   <div data-role="fieldcontain">
     <form:label path="keywords">Keywords:</form:label>
     <form:input  path="keywords" />
-    <form:errors path="keywords" style="color:red"></form:errors>
   </div>
   <div data-role="fieldcontain">
   <fieldset data-role="controlgroup" data-type="horizontal">
@@ -23,7 +26,6 @@
   <form:radiobutton path="keywordsEnabled" value="0" label="No" />
   <form:radiobutton path="keywordsEnabled" value="1" label="Yes"/>
   </fieldset>
-  <form:errors path="keywordsEnabled" style="color:red"></form:errors>
   </div>
   <div data-role="fieldcontain">
   <fieldset data-role="controlgroup" data-type="horizontal">
@@ -31,7 +33,6 @@
   <form:radiobutton path="visibilityLevel" value="private" label="Private"/>
   <form:radiobutton path="visibilityLevel" value="open" label="Open"/>
   </fieldset>
-  <form:errors path="visibilityLevel" style="color:red"></form:errors>
   </div>
   <div data-role="fieldcontain">
   <fieldset data-role="controlgroup" data-type="horizontal">
@@ -39,7 +40,6 @@
   <form:radiobutton path="accessLevel" value="restricted" label="Restricted"/>
   <form:radiobutton path="accessLevel" value="unrestricted" label="Unrestricted"/>
   </fieldset>
-    <form:errors path="accessLevel" style="color:red"></form:errors>
   </div>
   <input data-theme="b" type="submit" value="Ok" />
   </form:form>

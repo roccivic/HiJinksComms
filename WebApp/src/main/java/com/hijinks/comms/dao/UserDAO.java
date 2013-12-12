@@ -13,4 +13,6 @@ public interface UserDAO {
 	List<User> getMembersOfCommunity(int communityId);
 	List<User> searchForMembers(String fname, String lname, String email);
 	public User getUserById(int userId);
+	public boolean isOwner(int userId, int communityId);
+	public boolean isPartOfCommunity(int userId, int communityId);
 }

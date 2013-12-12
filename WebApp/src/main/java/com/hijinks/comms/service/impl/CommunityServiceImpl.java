@@ -38,13 +38,13 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public List<Community> getNewestCommunities() {
-		return communityDAO.getNewestCommunities();
+	public List<Community> getNewestCommunities(int userId) {
+		return communityDAO.getNewestCommunities(userId);
 	}
 
 	@Override
-	public List<Community> getAllCommunities() {
-		return communityDAO.getAllCommunities();
+	public List<Community> getAllCommunities(int userId) {
+		return communityDAO.getAllCommunities(userId);
 	}
 
 	@Override
@@ -56,5 +56,4 @@ public class CommunityServiceImpl implements CommunityService {
 	public Community getCommunityById(int id) {
 		return communityDAO.getCommunityById(id);
 	}
-
 }

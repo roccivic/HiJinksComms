@@ -5,6 +5,11 @@
 		Error: Community not found
 	</div>
 </c:if>
+<c:if test="${not empty messageType}">
+	<div class="notification ${messageType}">
+		${messageText}
+	</div>
+</c:if>
 <c:if test="${ not empty community}">
 	<dl>
 		<dt>Name</dt>
@@ -44,4 +49,19 @@
 			</c:forEach>
 		</c:if>
 	</ul>
+	<c:if test="${not empty owner}">
+		<form method="GET" action="<%= request.getContextPath() %>/inviteUsers/${community.id}/null">
+			<input data-theme="b" type="submit" value="Invite Users" />
+		</form>
+	</c:if>
+	<c:if test="${not empty restricted}">
+		<form method="GET" action="<%= request.getContextPath() %>/requestToJoin/${community.id}">
+			<input data-theme="b" type="submit" value="Request to Join" />
+		</form>
+	</c:if>
+	<c:if test="${not empty unrestricted}">
+		<form method="GET" action="<%= request.getContextPath() %>/joinCommunity/${community.id}">
+			<input data-theme="b" type="submit" value="Join" />
+		</form>
+	</c:if>
 </c:if>

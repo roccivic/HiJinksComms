@@ -1,12 +1,8 @@
 package com.hijinks.comms;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -17,9 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.hijinks.comms.models.Community;
 import com.hijinks.comms.models.User;
 import com.hijinks.comms.service.CommunityService;
@@ -42,7 +36,7 @@ public class CommunityController extends CommonHandler {
 
 		model.addAttribute(
 			"communities",
-			communityService.getNewestCommunities()
+			communityService.getNewestCommunities(((User) session.getAttribute("user")).getId())
 		);
 		return "newestCommunities";
 	}
@@ -59,7 +53,7 @@ public class CommunityController extends CommonHandler {
 
 		model.addAttribute(
 			"communities",
-			communityService.getAllCommunities()
+			communityService.getAllCommunities(((User) session.getAttribute("user")).getId())
 		);
 		return "search";
 	}
@@ -70,22 +64,49 @@ public class CommunityController extends CommonHandler {
 		}
 		ApplicationContext context = 
 	             new ClassPathXmlApplicationContext("beans.xml");
-
+		
 		CommunityService communityService = 
 	      (CommunityService)context.getBean("communityService");
-
+		
+		Community current = communityService.getCommunityById(Integer.parseInt(id));
+		
 		model.addAttribute(
 			"community",
-			communityService.getCommunityById(Integer.parseInt(id))
+			current
 		);
 		
+		
+			
 		UserService userService = 
 	      (UserService)context.getBean("userService");
-
+		
 		model.addAttribute(
 			"users",
 			userService.getMembersOfCommunity(Integer.parseInt(id))
 		);
+		
+	
+		if(userService.isOwner(((User) session.getAttribute("user")).getId(), Integer.parseInt(id))) {
+			model.addAttribute(
+					"owner",
+					"1"
+				);
+		}
+		else {
+			if(!userService.isPartOfCommunity(((User) session.getAttribute("user")).getId(), Integer.parseInt(id))) {
+				if(current.getAccessLevel().equals("unrestricted")){
+					model.addAttribute(
+							"unrestricted",
+							"1"
+						);
+				} else {
+					model.addAttribute(
+							"restricted",
+							"1"
+						);
+				}
+			}
+		}
 		
 		return "community";
 	}
@@ -163,6 +184,12 @@ public class CommunityController extends CommonHandler {
 			"users",
 			userService.getMembersOfCommunity(newCommunity.getId())
 		);
+		
+		model.addAttribute(
+					"owner",
+					"1"
+				);
+		
 
 		return "community";
 	}

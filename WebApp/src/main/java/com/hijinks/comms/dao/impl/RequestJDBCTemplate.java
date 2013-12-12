@@ -54,7 +54,7 @@ public class RequestJDBCTemplate implements RequestDAO {
 	}
 
 	@Override
-	public void sendRequest(int userId, int communityId) {
+	public void sendRequest(int communityId, int userId) {
 		String query = "INSERT INTO `Request` "
 				+ "(`communityId`, `user`) "
 				+ "VALUES (?, ?)";

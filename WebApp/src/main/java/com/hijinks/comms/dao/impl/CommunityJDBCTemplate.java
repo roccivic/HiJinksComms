@@ -73,26 +73,34 @@ public class CommunityJDBCTemplate implements CommunityDAO{
 	}
 
 	@Override
-	public List<Community> getNewestCommunities() {
+	public List<Community> getNewestCommunities(int userId) {
 		String query = "SELECT `Community`.`id` AS `communityId`, `name`, `description`, `keywords`, `keywordsEnabled`, `visibilityLevel`, `accessLevel`, `created`, "
-				+ "`Users`.`id` AS `userId`, `fName`,`lName`, `email`, `type`"
+				+ "`Users`.`id` AS `userId`, `fName`,`lName`, `email`, `type` "
 				+ "FROM `Community` "
-				+ "INNER JOIN Users ON"
-				+ "`Users`.`id` = `Community`.`owner`"
+				+ "INNER JOIN Users ON "
+				+ "`Users`.`id` = `Community`.`owner` "
+				+ "INNER JOIN `CommunityUsers` ON "
+				+ "`Community`.`id` = `CommunityUsers`.`community` "
+				+ "	WHERE `Community`.`visibilityLevel` = 'open' OR "
+				+ "`CommunityUsers`.`user` = ? "
 				+ "ORDER BY `created` DESC LIMIT 10;";
-		List<Community> communities = jdbcTemplateObject.query(query, new CommunityMapper());
+		List<Community> communities = jdbcTemplateObject.query(query, new Object[]{userId}, new CommunityMapper());
 		return communities;
 	}
 
 	@Override
-	public List<Community> getAllCommunities() {
+	public List<Community> getAllCommunities(int userId) {
 		String query = "SELECT `Community`.`id` AS `communityId`, `name`, `description`, `keywords`, `keywordsEnabled`, `visibilityLevel`, `accessLevel`, `created`, "
-				+ "`Users`.`id` AS `userId`, `fName`,`lName`, `email`, `type`"
+				+ "`Users`.`id` AS `userId`, `fName`,`lName`, `email`, `type` "
 				+ "FROM `Community` "
-				+ "INNER JOIN Users ON"
-				+ "`Users`.`id` = `Community`.`owner`"
+				+ "INNER JOIN Users ON "
+				+ "`Users`.`id` = `Community`.`owner` "
+				+ "INNER JOIN `CommunityUsers` ON "
+				+ "`Community`.`id` = `CommunityUsers`.`community` "
+				+ "	WHERE `Community`.`visibilityLevel` = 'open' OR "
+				+ "`CommunityUsers`.`user` = ? "
 				+ "ORDER BY `name` ASC";
-		List<Community> communities = jdbcTemplateObject.query(query, new CommunityMapper());
+		List<Community> communities = jdbcTemplateObject.query(query, new Object[]{userId}, new CommunityMapper());
 		return communities;
 	}
 
@@ -117,5 +125,4 @@ public class CommunityJDBCTemplate implements CommunityDAO{
 			return communities.get(0);
 		}
 	}
-
 }

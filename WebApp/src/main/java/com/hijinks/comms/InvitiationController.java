@@ -1,7 +1,9 @@
 package com.hijinks.comms;
 
 import java.util.Locale;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -9,8 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.hijinks.comms.models.User;
+import com.hijinks.comms.service.CommunityService;
 import com.hijinks.comms.service.InvitationService;
+import com.hijinks.comms.service.UserService;
 
 @Controller
 public class InvitiationController extends CommonHandler {
@@ -114,5 +119,36 @@ public class InvitiationController extends CommonHandler {
 			"Successfully accepted invitation"
 		);
 		return "invitations";
+	}
+	
+	@RequestMapping(value = "/inviteUsers/{communityId}/{userId}", method = RequestMethod.GET)
+	public String inviteUsers(@PathVariable("communityId") String communityId, @PathVariable("userId") String userId, Locale locale, Model model, HttpSession session) {
+		if (session.getAttribute("user") == null) {
+			return "login";
+		}
+		ApplicationContext context = 
+	             new ClassPathXmlApplicationContext("beans.xml");
+
+		UserService userService = 
+	      (UserService)context.getBean("userService");
+		
+		InvitationService invitationService = 
+			      (InvitationService)context.getBean("invitationService");
+		
+		CommunityService communityService = 
+			      (CommunityService)context.getBean("communityService");
+		
+		if(!userId.equals("null")){
+			invitationService.sendInvite(((User) session.getAttribute("user")).getId(), Integer.parseInt(communityId), Integer.parseInt(userId));
+		}
+		model.addAttribute(
+				"community", 
+				communityService.getCommunityById(Integer.parseInt(communityId))
+				);
+		model.addAttribute(
+			"users",
+			userService.getUsersNotInCommunity(Integer.parseInt(communityId)) //invited too
+		);
+		return "inviteUsers";
 	}
 }

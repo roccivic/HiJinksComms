@@ -24,10 +24,15 @@ public class UserJDBCTemplate implements UserDAO {
 				+ "  FROM `CommunityUsers` "
 				+ "  WHERE `CommunityUsers`.`community` = ?"
 				+ ") "
+				+ "AND `id` NOT IN ( "
+			    + "SELECT `invitee` "
+			    + "FROM `Invitation` WHERE `communityId` = ?"
+			    + ") "
 				+ "ORDER BY `lname`,`fname` ASC";
 		return jdbcTemplateObject.query(
 			query,
-			new Object[]{communityId},
+			new Object[]{communityId,
+					     communityId},
 			new UserMapper()
 		);
 	}
@@ -99,6 +104,42 @@ public class UserJDBCTemplate implements UserDAO {
 		} else {
 			return users.get(0);
 		}
+	}
+	
+	@Override
+	public boolean isOwner(int userId, int communityId) {
+		String query = "SELECT COUNT(*) "
+				+ "FROM `Community` "
+				+ "WHERE `id` = ? AND `owner` = ?";
+		int val = jdbcTemplateObject.queryForInt(
+			query,
+			communityId,
+			userId
+		);
+		if(val < 1){
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean isPartOfCommunity(int userId, int communityId) {
+		String query = "SELECT COUNT(*) "
+				+ "FROM `CommunityUsers` "
+				+ "WHERE `community` = ? AND `User` = ? "
+				+ "OR `User` IN(SELECT `user` FROM `Request` WHERE `communityId` = ?) "
+				+ "OR `User` IN(SELECT `invitee` FROM `Invitation` WHERE `communityId` = ?)";
+		int val = jdbcTemplateObject.queryForInt(
+			query,
+			communityId,
+			userId,
+			communityId,
+			communityId
+		);
+		if(val < 1){
+			return false;
+		}
+		return true;
 	}
 
 }
