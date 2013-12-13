@@ -28,7 +28,21 @@ public class InvitationJDBCTemplateTest {
 	         System.out.println("Date : " + record.getDate());
 	         System.out.println("--------------------");
 	      }
+		
+		//Get Invitation by Id
+		Invitation invite = new Invitation();
+		invite = invitationJDBCTemplate.getInvitationById(1,1);
+		for (Invitation record : invitations) {
+	         System.out.println("ID : " + record.getId());
+	         System.out.println("Invitee : " + record.getInvitee());
+	         System.out.println("Comunity Id : " + record.getCommunity());
+	         System.out.println("Invited By : " + record.getInvitedBy());
+	         System.out.println("Date : " + record.getDate());
+	         System.out.println("--------------------");
+	      }
 		//remove invite
 		invitationJDBCTemplate.deleteInvite(2, 19);
+		
+		
 	}
 }

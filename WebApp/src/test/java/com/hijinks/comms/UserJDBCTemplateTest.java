@@ -23,7 +23,9 @@ public class UserJDBCTemplateTest {
 
 		UserJDBCTemplate userJDBCTemplate = 
 	      (UserJDBCTemplate)context.getBean("userJDBCTemplate");
-
+		
+		User test = new User();
+		
 		User result = userJDBCTemplate.LogIn(
 			"michael.holmes@doesnotexist.com",
 			"123456"
@@ -47,5 +49,22 @@ public class UserJDBCTemplateTest {
 		printUsers(
 			userJDBCTemplate.getUsersNotInCommunity(2)
 		);
+		System.out.println("Get user 1 by Id: ");
+		test = userJDBCTemplate.getUserById(1);
+		System.out.println(test.getId() + " : inserted 1 ");
+		
+		System.out.println("is Michael Owner of Community 1 : ");
+		if(userJDBCTemplate.isOwner(1, 1))
+			System.out.println("Pass");
+		else
+			System.out.println("Fail");
+		
+		System.out.println("Is Michael part of community 1");
+		if(userJDBCTemplate.isPartOfCommunity(1, 1))
+			System.out.println("Pass");
+		else
+			System.out.println("Fail");
+		
+		
 	}
 }

@@ -81,5 +81,39 @@ public class CommunityJDBCTemplateTest {
 		         System.out.println("Date Created : " + record.getCreated());
 		         System.out.println("--------------------");
 			}	
+			communities = null;
+			//Get Community By id
+			communities.add(communityJDBCTemplate.getCommunityById(1));
+			System.out.println("Getting community by Id 1");
+			for (Community record : communities) {
+		         System.out.println("ID : " + record.getId());
+		         System.out.println("Name : " + record.getName());
+		         System.out.println("Owner : " + record.getOwner());
+		         System.out.println("Keywords : " + record.getKeywords());
+		         System.out.println("Description : " + record.getDescription());
+		         System.out.println("Keywords Enabled : " + record.isKeywordsEnabled());
+		         System.out.println("Visibility Level : " + record.getVisibilityLevel());
+		         System.out.println("Access Level : " + record.getAccessLevel());
+		         System.out.println("Date Created : " + record.getCreated());
+		         System.out.println("--------------------");
+		      }
+			communities = null;
+			//Get Newest
+			communities.add(communityJDBCTemplate.getNewestCommunity());
+			System.out.println("Getting newest community");
+			for (Community record : communities) {
+		         System.out.println("ID : " + record.getId());
+		         System.out.println("Name : " + record.getName());
+		         System.out.println("Owner : " + record.getOwner());
+		         System.out.println("Keywords : " + record.getKeywords());
+		         System.out.println("Description : " + record.getDescription());
+		         System.out.println("Keywords Enabled : " + record.isKeywordsEnabled());
+		         System.out.println("Visibility Level : " + record.getVisibilityLevel());
+		         System.out.println("Access Level : " + record.getAccessLevel());
+		         System.out.println("Date Created : " + record.getCreated());
+		         System.out.println("--------------------");
+		      }
+			
+			
 	}		
 }
