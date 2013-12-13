@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `pma__designer_coords`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__designer_coords` (
+CREATE TABLE IF NOT EXISTS `pma_designer_coords` (
   `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
   `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
   `x` int(11) DEFAULT NULL,
@@ -40,8 +40,7 @@ CREATE TABLE IF NOT EXISTS `pma__designer_coords` (
 -- Dumping data for table `pma__designer_coords`
 --
 
-INSERT INTO `pma__designer_coords` (`db_name`, `table_name`, `x`, `y`, `v`, `h`) VALUES
-('HiJinksComms', 'Announcement', 416, 589, 1, 1),
+INSERT INTO `pma_designer_coords` (`db_name`, `table_name`, `x`, `y`, `v`, `h`) VALUES
 ('HiJinksComms', 'Community', 790, 129, 1, 1),
 ('HiJinksComms', 'Invitation', 440, 221, 1, 1),
 ('HiJinksComms', 'Request', 440, 402, 1, 1),
