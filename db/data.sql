@@ -93,6 +93,3 @@ INSERT INTO `CommunityUsers` (`community`, `user`) VALUES
 (22, 1),
 (23, 1);
 
-
-INSERT INTO `Announcement` (`id`, `title`, `text`, `communityId`, `date`, `createdBy`) VALUES
-(1, 'HiJinks web app begining', 'The beginning date of the HiJinks project is 29.08.2020. Until then chill out ...', 1, '2013-11-16 20:54:54', 1);

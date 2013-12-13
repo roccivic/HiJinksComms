@@ -23,24 +23,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Announcement`
---
-
-CREATE TABLE IF NOT EXISTS `Announcement` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(30) NOT NULL,
-  `text` text NOT NULL,
-  `communityId` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `createdBy` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `communityId` (`communityId`),
-  KEY `createdBy` (`createdBy`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `Community`
 --
 
@@ -128,13 +110,6 @@ CREATE TABLE IF NOT EXISTS `Users` (
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `Announcement`
---
-ALTER TABLE `Announcement`
-  ADD CONSTRAINT `Announcement_ibfk_1` FOREIGN KEY (`communityId`) REFERENCES `Community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Announcement_ibfk_2` FOREIGN KEY (`createdBy`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Community`
